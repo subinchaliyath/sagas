@@ -4,10 +4,17 @@ import createSagaMiddleware from "redux-saga";
 import { userLoginReducer } from "./reducers/userReducer";
 import { watcherSaga } from "./sagas/rootSagas";
 
+import { reducer as formReducer } from "redux-form";
+
+const rootReducer = combineReducers({
+  userLogin: userLoginReducer,
+  form: formReducer,
+});
+
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  userLoginReducer,
+  rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
